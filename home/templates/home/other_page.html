@@ -29,6 +29,15 @@
         
         {{ page.body|richtext }}
 
+        {% if page.portrait %}
+            <div class="portrait" style="float: left;">
+            </div>
+        {% endif %}
+
+        {% if page.body2 %}
+            {{ page.body2|richtext }}
+        {% endif %}
+
         </div>
     </div>
   </div>

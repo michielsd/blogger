@@ -32,8 +32,17 @@ class HomePage(Page):
 class OtherPage(Page):
     intro = models.CharField(max_length=250, blank=True)
     body = RichTextField(blank=True)
+    body2 = RichTextField(blank=True)
 
     masthead = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    portrait = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
         blank=True,
@@ -44,5 +53,7 @@ class OtherPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('intro'),
         FieldPanel('body', classname="full"),
+        FieldPanel('body2', classname="full"),
         ImageChooserPanel('masthead'),
+        ImageChooserPanel('portrait'),
     ]

@@ -43,6 +43,21 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
+    <!-- Style for portrait -->
+    {% image page.portrait width-150 as portrait %}
+    <style>
+      .portrait {
+          display: block;
+          width: 150px;
+          height: 150px;
+          border-radius: 75px;
+          background-image: url('{{ portrait.url }}');
+          background-size: 90%;   
+          background-repeat: no-repeat;
+          background-position:center;
+        }
+    </style>
+
   </head>
 
   <body>
