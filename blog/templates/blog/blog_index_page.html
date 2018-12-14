@@ -1,0 +1,62 @@
+{% extends "blog/base.html" %}
+
+{% load static wagtailcore_tags wagtailimages_tags el_pagination_tags %}
+
+{% block body_class %}template-blogindexpage{% endblock %}
+
+{% block content %}
+    <!-- Page Header -->
+    {% image page.masthead original as image %}
+    <header class="masthead" style="background-image: url('{{ image.url }}')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>{{ page.title }}</h1>
+              <span class="subheading">Everything is a test</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+        {% paginate blogpages %}
+        {% for post in blogpages %}
+            {% with post=post.specific %}
+                <div class="row">
+                  <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="post-preview">
+                      <a href="{% pageurl post %}">
+                        <h2 class="post-title">
+                          {{ post.title }}
+                        </h2>
+                        <h3 class="post-subtitle">
+                          {{ post.intro }}
+                        </h3>
+                      </a>
+                      <p class="post-meta">Posted on {{ post.date }}</p>
+                    </div>
+                  </div>
+                </div>
+                    <hr>
+            {% endwith %}
+        {% endfor %}
+        {% get_pages %}
+        {% if pages.paginated %}
+        <div class="clearfix">
+          {% if pages.next.path %}
+          <a class="btn btn-primary float-right" href="{{ pages.next.path }}">Older posts &rarr;</a>
+          {% endif %}
+
+          {% if pages.previous.path %}
+          <a class="btn btn-primary float-right" href="{{ pages.previous.path }}">&larr; Newer posts</a>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        </div>
+      </div>
+      
+{% endblock %}
