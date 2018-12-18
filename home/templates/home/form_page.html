@@ -1,12 +1,11 @@
 {% extends "blog/base.html" %}
 
-{% load static wagtailcore_tags wagtailimages_tags el_pagination_tags %}
+{% load static wagtailcore_tags wagtailimages_tags el_pagination_tags widget_tweaks %}
 
 {% block body_class %}template-other-page{% endblock %}
 
 {% block content %}
-    
-<!-- Page Header -->
+
 {% image page.masthead original as image %}
 <header class="masthead" style="background-image: url('{{ image.url }}')">
   <div class="overlay"></div>
@@ -27,20 +26,23 @@
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
         
-        {{ page.body|richtext }}
+            {{ page.body|richtext }}
 
-        {% if page.portrait %}
-            <div class="portrait" style="float: left;">
-            </div>
-        {% endif %}
+            <form action="{% pageurl page %}" method="POST">
+                {% csrf_token %}
+                
+                {% for field in form.visible_fields %}
+                  <div class="form-group">
+                    <b>{{ field.label_tag }}</b>
+                    {% render_field field class+="form-control" %}
+                  </div>
+                {% endfor %}
 
-        {% if page.body2 %}
-            {{ page.body2|richtext }}
-        {% endif %}
-
+                <button type="submit" class="btn btn-primary" >Submit</button>
+            </form>
+           </div>
         </div>
     </div>
-  </div>
-
+</article>
 
 {% endblock %}

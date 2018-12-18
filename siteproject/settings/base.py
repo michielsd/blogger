@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 
     #added apps
     'el_pagination',
+    'widget_tweaks',
 
     #local apps
     'blog',

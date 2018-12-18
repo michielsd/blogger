@@ -5,8 +5,7 @@
 {% block body_class %}template-other-page{% endblock %}
 
 {% block content %}
-    
-<!-- Page Header -->
+
 {% image page.masthead original as image %}
 <header class="masthead" style="background-image: url('{{ image.url }}')">
   <div class="overlay"></div>
@@ -26,21 +25,12 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
-        
-        {{ page.body|richtext }}
 
-        {% if page.portrait %}
-            <div class="portrait" style="float: left;">
-            </div>
-        {% endif %}
+            {{ page.thank_you_text|richtext }}
 
-        {% if page.body2 %}
-            {{ page.body2|richtext }}
-        {% endif %}
-
+          </div>
         </div>
-    </div>
-  </div>
-
+      </div>
+</article>
 
 {% endblock %}
